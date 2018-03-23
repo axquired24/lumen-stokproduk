@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>AS Merch | Product Stock</title>
+
+    <!-- Pure CSS -->
+    <link rel="stylesheet" href="plugins/purecss/pure-min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="plugins/font-awesome/css/font-awesome.min.css">
+</head>
+<body>
+    <div id="app">
+
+        <div class="container" v-if="homeView()">
+            <div align="center" class="pure-g">
+                <div class="pure-u-1-1"><h1 align="center">Menu</h1></div>
+                <!-- divider -->
+                <div class="pure-u-1-2">
+                    <a class="menu pure-button-primary pure-button" @click="catShow()">
+                        <h1><i class="fa fa-sitemap"></i></h1> <p>Kategori</p>
+                    </a>
+                </div>
+                <div class="pure-u-1-2">
+                    <a class="menu pure-button-primary pure-button" @click="listShow()">
+                        <h1><i class="fa fa-th-large"></i></h1> <p>Daftar Produk</p>
+                    </a>
+                </div>
+                <div class="pure-u-1-2">
+                    <a class="menu button-warning pure-button" @click="stockShow()">
+                        <h1><i class="fa fa-archive"></i></h1> <p>Stok</p>
+                    </a>
+                </div>
+                <div class="pure-u-1-2">
+                    <a class="menu pure-button-primary pure-button" @click="addShow()">
+                        <h1><i class="fa fa-plus-square"></i></h1> <p>Tambah Baru</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- /.container - home -->
+
+        <div class="container" v-if="listView()">
+            <div align="center" class="pure-g">
+                <div class="pure-u-1-1"><h1 align="center">LIST</h1></div>
+                
+            </div>
+        </div>
+        <!-- /.container - list -->
+
+
+        <div class="container" v-if="stockView()">
+            <div align="center" class="pure-g">
+                <div class="pure-u-1-1"><h1 align="center">STOCK</h1></div>
+                
+            </div>
+        </div>
+        <!-- /.container - stock -->
+
+
+        <div class="container" v-if="catView()">
+            <div align="center" class="pure-g">
+                <div class="pure-u-1-1"><h1 align="center">CATEGORY</h1></div>
+                
+            </div>
+        </div>
+        <!-- /.container - category -->
+
+
+        <div class="container" v-if="addView()">
+            <div align="center" class="pure-g">
+                <div class="pure-u-1-1"><h1 align="center">ADD Form</h1></div>
+                
+            </div>
+        </div>
+        <!-- /.container - add -->
+
+        <div align="center" class="pure-g" v-if="! homeView()">
+            <div class="pure-u-1-1">
+                <a class="pure-button" @click="homeShow()">
+                    <i class="fa fa-chevron-left"></i> Kembali ke Home
+                </a>
+            </div>
+        </div>
+        <!-- /.container - back to home -->
+
+    </div>
+    <!-- /#app -->
+
+
+    <script src="plugins/vue/vue.min.js"></script>
+    <!-- <script src="plugins/jquery/jquery.min.js"></script> -->
+    <script src="js/app.js"></script>
+    
+</body>
+</html>
