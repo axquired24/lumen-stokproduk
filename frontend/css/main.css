@@ -1,5 +1,5 @@
 .container {
-    margin: 3em;
+    margin: 2em 1em;
     margin-bottom: 1em;
 }
 
@@ -7,6 +7,41 @@ a.menu {
     width: 90%;
     margin: 5%;
     border-radius: 0;
+}
+
+input.soft-input {
+    padding: .5em .6em;
+    box-sizing:border-box;
+    vertical-align:middle;
+    box-shadow:inset 0 1px 3px #ddd;
+    border: 1px solid #ccc
+}
+
+.rowlist {
+    border-bottom: #CCC 1px solid;
+    margin-top: 1em;
+}
+
+.rowlist p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #444;
+}
+
+.rowlist span {
+    font-size: 14px;
+    color: #444;
+}
+
+.rowlist span:before {
+    content: '#';
+}
+
+.rowlist:hover strong,
+.rowlist:active strong,
+.rowlist:hover span,
+.rowlist:active span {
+    color: #0078e7;
 }
 
 .button-success,
@@ -37,3 +72,20 @@ a.menu {
     background: rgb(66, 184, 221);
     /* this is a light blue */
 }
+
+.button-xsmall {
+    font-size: 70%;
+}
+
+.button-small {
+    font-size: 85%;
+}
+
+.button-large {
+    font-size: 110%;
+}
+
+.button-xlarge {
+    font-size: 125%;
+}
+
