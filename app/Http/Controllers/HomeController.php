@@ -59,10 +59,7 @@ class HomeController extends Controller
             case 'edit':
                 $validator = \Validator::make($request->all(), [
                     'id' => 'required',
-                    'product_cat_id' => ['required',
-                                         Rule::in($product_cat_ids),
-                                        ],
-                    'name' => ['required',
+                    'name' => [
                                 Rule::unique('products')->ignore($request->input('id'))],
                     'stock' => 'integer',
                     'price' => 'integer'
@@ -306,8 +303,14 @@ class HomeController extends Controller
     }
 
     function saveProduct(Request $request, Product $product) {
-        $product->name = $request->input('name');
-        $product->product_cat_id = $request->input('product_cat_id');
+        if($request->has('name')) {
+            $product->name = $request->input('name');
+        }
+
+        if($request->has('product_cat_id')) {
+            $product->product_cat_id = $request->input('product_cat_id');            
+        }
+        
         $product->description = $this->setIfNull($request, 'description');
         $product->stock = $this->setIfNull($request, 'stock', 0);
         $product->price = $this->setIfNull($request, 'price', 0);
