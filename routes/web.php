@@ -20,4 +20,6 @@ $router->get('/key', function () {
 });
 
 $router->post('/productcat[/{action}]', 'HomeController@resProductCat');
+$router->post('/product/search', 'HomeController@resProductSearch');
 $router->post('/product[/{action}]', 'HomeController@resProduct');
+$router->post('/dummy/product', 'HomeController@dummyProduct');

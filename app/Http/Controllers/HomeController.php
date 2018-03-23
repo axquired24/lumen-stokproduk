@@ -142,9 +142,44 @@ class HomeController extends Controller
                 break;
 
             default:
-                # code...
+                // list
+                $limit = $this->setIfNull($request, 'limit', 20);
+                $products = Product::with('productCat')->paginate($limit);
+                $resp = (object) [
+                            'task' => 'list product',
+                            'message' => 'success',
+                            'data' => $products
+                        ];
+                
+                return response()->json($resp);
                 break;
         }
+    }
+    
+    public function resProductSearch(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'q' => 'required|min:3'
+        ]);
+        
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        $q = $request->input('q');
+        $limit = $this->setIfNull($request, 'limit', 20);
+        $products = Product::where('name', 'LIKE', '%'.$q.'%')
+                    ->with('productCat')
+                    ->paginate($limit);
+        $resp = (object) [
+                    'task' => 'search product',
+                    'message' => 'success',
+                    'data' => $products
+                ];
+        
+        return response()->json($resp);
     }
 
     public function resProductCat(Request $request=null, $action=null)
@@ -313,5 +348,32 @@ class HomeController extends Controller
         return $ret;
     }
 
+    public function dummyProduct(Request $request, \Faker\Generator $faker)
+    {
+        $count = $this->setIfNull($request, 'count', 20);
+
+        $products = collect();
+
+        for($i=0; $i < $count; $i++) {
+            $product = new Product();
+
+            $product->name = $faker->streetName;
+            $product->product_cat_id = mt_rand(1,5);
+            $product->description = $faker->text(200);
+            $product->stock = mt_rand(0,100);
+            $product->price = mt_rand(60,100) * 1000;
+            $product->save();
+
+            $products->push($product);
+        }
+
+        $resp = (object) [
+            'task' => 'create '.$count.' dummy product',
+            'message' => 'success',
+            'data' => $products
+        ];
+
+        return response()->json($resp);
+    }
     //
 }
